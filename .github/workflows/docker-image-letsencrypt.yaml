@@ -35,7 +35,7 @@ jobs:
             )
           IMAGE_EXISTS=$(if [ $HTTP_CODE -eq 200 ]; then echo "true"; else echo "false"; fi)
           echo "HTTP code: $HTTP_CODE, Image exists: $IMAGE_EXISTS"
-          echo "should_build=$(if [ $IMAGE_EXISTS == "true" ]; then echo "false"; else echo "true"; fi)" >> $GITHUB_OUTPUT
+          echo "should_build=$(if [ $IMAGE_EXISTS == 'true' ]; then echo 'false'; else echo 'true'; fi)" >> $GITHUB_OUTPUT
 
   build:
     needs: check
@@ -51,7 +51,8 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Print tailscale version
-        run: echo "Latest tailscale version: ${{ env.TAILSCALE_VERSION }}"
+        run: >
+          echo 'Latest tailscale version: ${{ env.TAILSCALE_VERSION }}'
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v4
